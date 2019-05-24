@@ -8,9 +8,9 @@ workflows:
         requires:
           - npmbuild_and_persist
         checkout: false
-          pre-steps:
+        pre-steps:
           - checkout
-          - rm wordpress-orb-demo/wp-content/themes/may2019/.gitignore
+          - run: rm wordpress-orb-demo/wp-content/themes/may2019/.gitignore
           - attach_workspace:
               at: .
 
