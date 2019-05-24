@@ -24,7 +24,7 @@ workflows:
           - run: rm wp-content/themes/may2019/.gitignore
 
 orbs:
-  pantheon: pantheon-systems/pantheon@0.0.1
+  pantheon: pantheon-systems/pantheon@0.0.2
 jobs:
   # This job compiles Sass and then saves (persists) the directory
   # containing the compiled css for reuse in the pantheon/push job.
