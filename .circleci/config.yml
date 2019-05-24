@@ -10,7 +10,7 @@ workflows:
         checkout: false
         pre-steps:
           - checkout
-          - run: wp-content/themes/may2019/.gitignore
+          - run: rm wp-content/themes/may2019/.gitignore
           - attach_workspace:
               at: .
 
