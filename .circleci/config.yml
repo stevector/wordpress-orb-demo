@@ -1,9 +1,29 @@
 version: 2.1
 workflows:
   version: 2
-  # @todo, add Sass example job
-  just_push:
+  compile_and_push:
     jobs:
-    - pantheon/push
+    - npmbuild_and_persist
+    - pantheon/push:
+        requires:
+          - npmbuild_and_persist
+        checkout: false
+          pre-steps:
+          - checkout
+          - attach_workspace:
+              at: .
+
 orbs:
   pantheon: pantheon-systems/pantheon@0.0.1
+jobs:
+  npmbuild_and_persist:
+    docker:
+    - image: node:10.15.3
+    steps:
+    - checkout
+    - run: cd wordpress-orb-demo/wp-content/themes/may2019 && npm ci
+    - run: cd wordpress-orb-demo/wp-content/themes/may2019 && npm run build
+    - persist_to_workspace:
+        root: .
+        paths:
+        - wordpress-orb-demo/wp-content/themes/may2019/dist
