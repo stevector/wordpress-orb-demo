@@ -1,3 +1,4 @@
+# See this example in use at https://github.com/stevector/wordpress-orb-demo
 version: 2.1
 workflows:
   version: 2
@@ -5,10 +6,17 @@ workflows:
     jobs:
     - npmbuild_and_persist
     - pantheon/push:
+        # This "requires" section tells CircleCI the order in which
+        # jobs must be run.
         requires:
           - npmbuild_and_persist
+        # Because the checkout command is called from pre-steps, it should
+        # not be run inside the orb-defined steps.
         checkout: false
         pre-steps:
+          # Perform a git checkout of the code from GitHub/Bitbucket so that
+          # custom commands (the rm below) can alter the code before it is
+          # pushed to Pantheon.
           - checkout
           # Attach this dist directory created in npmbuild_and_persist
           # which contains the compiled css.
@@ -34,7 +42,7 @@ jobs:
     steps:
     - checkout
     - run:
-        name: install npm dependencies
+        name: install npm dependencies in a custom WordPress child theme
         command: cd wp-content/themes/may2019 && npm ci
     - run:
         name: Compile Sass
