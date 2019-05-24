@@ -10,7 +10,7 @@ workflows:
         checkout: false
         pre-steps:
           - checkout
-          - run: rm wordpress-orb-demo/wp-content/themes/may2019/.gitignore
+          - run: wp-content/themes/may2019/.gitignore
           - attach_workspace:
               at: .
 
@@ -22,9 +22,9 @@ jobs:
     - image: node:10.15.3
     steps:
     - checkout
-    - run: cd wordpress-orb-demo/wp-content/themes/may2019 && npm ci
-    - run: cd wordpress-orb-demo/wp-content/themes/may2019 && npm run build
+    - run: cd wp-content/themes/may2019 && npm ci
+    - run: cd wp-content/themes/may2019 && npm run build
     - persist_to_workspace:
         root: .
         paths:
-        - wordpress-orb-demo/wp-content/themes/may2019/dist
+        - wp-content/themes/may2019/dist
