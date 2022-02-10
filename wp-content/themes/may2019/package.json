@@ -4,7 +4,7 @@
   "description": "Example child theme created to show Sass compilation in CI",
   "homepage": "https://github.com/stevector/wordpress-orb-demo",
   "devDependencies": {
-    "node-sass": "^4.9.3"
+    "node-sass": "^7.0.0"
   },
   "scripts": {
     "build": "node-sass scss/styles.scss dist/styles.css --output-style compressed"
